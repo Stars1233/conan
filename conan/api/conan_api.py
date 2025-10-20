@@ -66,7 +66,8 @@ class ConanAPI:
         self.profiles = ProfilesAPI(self, self._api_helpers)
         self.install = InstallAPI(self, self._api_helpers)
         self.graph = GraphAPI(self, self._api_helpers)
-        self.export = ExportAPI(self, self._api_helpers)
+        #: Used to export recipes and pre-compiled package binaries to the Conan cache
+        self.export: ExportAPI = ExportAPI(self, self._api_helpers)
         self.remove = RemoveAPI(self)
         self.new = NewAPI(self)
         #: Used to upload recipes and packages to remotes
@@ -82,7 +83,7 @@ class ConanAPI:
         self.report = ReportAPI(self, self._api_helpers)
 
     @property
-    def home_folder(self):
+    def home_folder(self) -> str:
         """ Where the Conan user home is located. Read only.
         Can be modified by the ``CONAN_HOME`` environment variable or by the
         ``.conanrc`` file in the current directory or any parent directory
